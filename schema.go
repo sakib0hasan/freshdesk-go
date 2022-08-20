@@ -1,0 +1,204 @@
+package freshdesk
+
+import "time"
+
+type Ticket struct {
+	Attachments     []interface{} `json:"attachments"`
+	CcEmails        []string      `json:"cc_emails"`
+	CompanyID       uint64        `json:"company_id"`
+	CustomFields    interface{}   `json:"custom_fields"`
+	Deleted         bool          `json:"deleted"`
+	Description     string        `json:"description"`
+	DescriptionText string        `json:"description_text"`
+	DueBy           time.Time     `json:"due_by"`
+	Email           string        `json:"email"`
+	EmailConfigID   int64         `json:"email_config_id"`
+	FacebookID      string        `json:"facebook_id"`
+	FrDueBy         time.Time     `json:"fr_due_by"`
+	FrEscalated     bool          `json:"fr_escalated"`
+	FwdEmails       []string      `json:"fwd_emails"`
+	GroupID         int64         `json:"group_id"`
+	ID              uint64        `json:"id"`
+	IsEscalated     bool          `json:"is_escalated"`
+	Name            string        `json:"name"`
+	Phone           string        `json:"phone"`
+	Priority        int64         `json:"priority"`
+	ProductID       int64         `json:"product_id"`
+	ReplyCcEmails   []string      `json:"reply_cc_emails"`
+	RequesterID     int64         `json:"requester_id"` // UserID of the requester
+	ResponderID     int64         `json:"responder_id"`
+	Source          int64         `json:"source"`
+	Spam            bool          `json:"spam"`
+	Status          int64         `json:"status"`
+	Subject         string        `json:"subject"`
+	Tags            []string      `json:"tags"`
+	ToEmails        []string      `json:"to_emails"`
+	TwitterID       string        `json:"twitter_id"`
+	Type            string        `json:"type"`
+	CreatedAt       time.Time     `json:"created_at"`
+	UpdatedAt       time.Time     `json:"updated_at"`
+}
+
+type TicketCreatePayload struct {
+	Name             string        `json:"name"`
+	RequesterID      int64         `json:"requester_id"` // UserID of the requester
+	Email            string        `json:"email"`
+	FacebookID       string        `json:"facebook_id"`
+	Phone            string        `json:"phone"`
+	TwitterID        string        `json:"twitter_id"`
+	UniqueExternalID string        `json:"unique_external_id"`
+	Subject          string        `json:"subject"`
+	Type             string        `json:"type"`
+	Status           int64         `json:"status"`
+	Priority         int64         `json:"priority"`
+	Description      string        `json:"description"`
+	ResponderID      int64         `json:"responder_id"`
+	Attachments      []interface{} `json:"attachments"`
+	CcEmails         []string      `json:"cc_emails"`
+	CustomFields     interface{}   `json:"custom_fields"`
+	DueBy            time.Time     `json:"due_by"`
+	EmailConfigID    int64         `json:"email_config_id"`
+	FrDueBy          time.Time     `json:"fr_due_by"`
+	GroupID          int64         `json:"group_id"`
+	ProductID        int64         `json:"product_id"`
+	Source           int64         `json:"source"`
+	Tags             []string      `json:"tags"`
+	CompanyID        uint64        `json:"company_id"`
+	InternalAgentID  int64         `json:"internal_agent_id"`
+	InternalGroupID  int64         `json:"internal_group_id"`
+}
+
+type TicketUpdatePayload struct {
+	Name             string        `json:"name"`
+	RequesterID      int64         `json:"requester_id"` // UserID of the requester
+	Email            string        `json:"email"`
+	FacebookID       string        `json:"facebook_id"`
+	Phone            string        `json:"phone"`
+	TwitterID        string        `json:"twitter_id"`
+	UniqueExternalID string        `json:"unique_external_id"`
+	Subject          string        `json:"subject"`
+	Type             string        `json:"type"`
+	Status           int64         `json:"status"`
+	Priority         int64         `json:"priority"`
+	Description      string        `json:"description"`
+	ResponderID      int64         `json:"responder_id"`
+	Attachments      []interface{} `json:"attachments"`
+	CustomFields     interface{}   `json:"custom_fields"`
+	DueBy            time.Time     `json:"due_by"`
+	EmailConfigID    int64         `json:"email_config_id"`
+	FrDueBy          time.Time     `json:"fr_due_by"`
+	GroupID          int64         `json:"group_id"`
+	ProductID        int64         `json:"product_id"`
+	Source           int64         `json:"source"`
+	Tags             []string      `json:"tags"`
+	CompanyID        uint64        `json:"company_id"`
+	InternalAgentID  int64         `json:"internal_agent_id"`
+	InternalGroupID  int64         `json:"internal_group_id"`
+}
+
+type Contact struct {
+	Active           bool          `json:"active"`
+	Address          string        `json:"address"`
+	Avatar           interface{}   `json:"avatar"`
+	CompanyID        uint64        `json:"company_id"`
+	ViewAllTickets   bool          `json:"view_all_tickets"`
+	CustomFields     interface{}   `json:"custom_fields"`
+	Deleted          bool          `json:"deleted"`
+	Description      string        `json:"description"`
+	Email            string        `json:"email"`
+	ID               uint64        `json:"id"`
+	JobTitle         string        `json:"job_title"`
+	Languages        string        `json:"language"`
+	Mobile           string        `json:"mobile"`
+	Name             string        `json:"name"`
+	OtherEmails      []string      `json:"other_emails"`
+	Phone            string        `json:"phone"`
+	Tags             []string      `json:"tags"`
+	TimeZone         string        `json:"time_zone"`
+	TwitterID        string        `json:"twitter_id"`
+	UniqueExternalID string        `json:"unique_external_id"`
+	OtherCompanies   []interface{} `json:"other_companies"`
+	CreatedAt        time.Time     `json:"created_at"`
+	UpdatedAt        time.Time     `json:"updated_at"`
+}
+
+type ContactCreatePayload struct {
+	Name             string        `json:"name,omitempty"`
+	Email            string        `json:"email,omitempty"`
+	Phone            string        `json:"phone,omitempty"`
+	Mobile           string        `json:"mobile,omitempty"`
+	TwitterID        string        `json:"twitter_id,omitempty"`
+	UniqueExternalID string        `json:"unique_external_id,omitempty"`
+	OtherEmails      []string      `json:"other_emails,omitempty"`
+	CompanyID        uint64        `json:"company_id,omitempty"`
+	ViewAllTickets   bool          `json:"view_all_tickets,omitempty"`
+	OtherCompanies   []interface{} `json:"other_companies,omitempty"`
+	Address          string        `json:"address,omitempty"`
+	Avatar           interface{}   `json:"avatar,omitempty"`
+	CustomFields     interface{}   `json:"custom_fields,omitempty"`
+	Description      string        `json:"description,omitempty"`
+	JobTitle         string        `json:"job_title,omitempty"`
+	Languages        string        `json:"language,omitempty"`
+	Tags             []string      `json:"tags,omitempty"`
+	TimeZone         string        `json:"time_zone,omitempty"`
+}
+
+type ContactUpdatePayload struct {
+	Name             string        `json:"name,omitempty"`
+	Email            string        `json:"email,omitempty"`
+	Phone            string        `json:"phone,omitempty"`
+	Mobile           string        `json:"mobile,omitempty"`
+	TwitterID        string        `json:"twitter_id,omitempty"`
+	UniqueExternalID string        `json:"unique_external_id,omitempty"`
+	OtherEmails      []string      `json:"other_emails,omitempty"`
+	CompanyID        uint64        `json:"company_id,omitempty"`
+	ViewAllTickets   bool          `json:"view_all_tickets,omitempty"`
+	OtherCompanies   []interface{} `json:"other_companies,omitempty"`
+	Address          string        `json:"address,omitempty"`
+	Avatar           interface{}   `json:"avatar,omitempty"`
+	CustomFields     interface{}   `json:"custom_fields,omitempty"`
+	Description      string        `json:"description,omitempty"`
+	JobTitle         string        `json:"job_title,omitempty"`
+	Languages        string        `json:"language,omitempty"`
+	Tags             []string      `json:"tags,omitempty"`
+	TimeZone         string        `json:"time_zone,omitempty"`
+}
+
+type Company struct {
+	CustomFields interface{} `json:"custom_fields"`
+	Description  string      `json:"description"`
+	Domains      []string    `json:"domains"`
+	ID           uint64      `json:"id"`
+	Name         string      `json:"name"`
+	Note         string      `json:"note"`
+	HealthScore  string      `json:"health_score"`
+	AccountTier  string      `json:"account_tier"`
+	RenewalDate  time.Time   `json:"renewal_date"`
+	Industry     string      `json:"industry"`
+	CreatedAt    time.Time   `json:"created_at"`
+	UpdatedAt    time.Time   `json:"updated_at"`
+}
+
+type CompanyCreatePayload struct {
+	CustomFields interface{} `json:"custom_fields,omitempty"`
+	Description  string      `json:"description,omitempty"`
+	Domains      []string    `json:"domains,omitempty"`
+	Name         string      `json:"name,omitempty"`
+	Note         string      `json:"note,omitempty"`
+	HealthScore  string      `json:"health_score,omitempty"`
+	AccountTier  string      `json:"account_tier,omitempty"`
+	RenewalDate  string      `json:"renewal_date,omitempty"`
+	Industry     string      `json:"industry,omitempty"`
+}
+
+type CompanyUpdatePayload struct {
+	CustomFields interface{} `json:"custom_fields,omitempty"`
+	Description  string      `json:"description,omitempty"`
+	Domains      []string    `json:"domains,omitempty"`
+	Name         string      `json:"name,omitempty"`
+	Note         string      `json:"note,omitempty"`
+	HealthScore  string      `json:"health_score,omitempty"`
+	AccountTier  string      `json:"account_tier,omitempty"`
+	RenewalDate  string      `json:"renewal_date,omitempty"`
+	Industry     string      `json:"industry,omitempty"`
+}
