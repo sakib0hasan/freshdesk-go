@@ -40,60 +40,60 @@ type Ticket struct {
 }
 
 type TicketCreatePayload struct {
-	Name             string        `json:"name"`
-	RequesterID      int64         `json:"requester_id"` // UserID of the requester
-	Email            string        `json:"email"`
-	FacebookID       string        `json:"facebook_id"`
-	Phone            string        `json:"phone"`
-	TwitterID        string        `json:"twitter_id"`
-	UniqueExternalID string        `json:"unique_external_id"`
-	Subject          string        `json:"subject"`
-	Type             string        `json:"type"`
-	Status           int64         `json:"status"`
-	Priority         int64         `json:"priority"`
-	Description      string        `json:"description"`
-	ResponderID      int64         `json:"responder_id"`
-	Attachments      []interface{} `json:"attachments"`
-	CcEmails         []string      `json:"cc_emails"`
-	CustomFields     interface{}   `json:"custom_fields"`
-	DueBy            time.Time     `json:"due_by"`
-	EmailConfigID    int64         `json:"email_config_id"`
-	FrDueBy          time.Time     `json:"fr_due_by"`
-	GroupID          int64         `json:"group_id"`
-	ProductID        int64         `json:"product_id"`
-	Source           int64         `json:"source"`
-	Tags             []string      `json:"tags"`
-	CompanyID        uint64        `json:"company_id"`
-	InternalAgentID  int64         `json:"internal_agent_id"`
-	InternalGroupID  int64         `json:"internal_group_id"`
+	Name             string        `json:"name,omitempty"`
+	RequesterID      int64         `json:"requester_id,omitempty"` // UserID of the requester
+	Email            string        `json:"email,omitempty"`
+	FacebookID       string        `json:"facebook_id,omitempty"`
+	Phone            string        `json:"phone,omitempty"`
+	TwitterID        string        `json:"twitter_id,omitempty"`
+	UniqueExternalID string        `json:"unique_external_id,omitempty"`
+	Subject          string        `json:"subject,omitempty"`
+	Type             string        `json:"type,omitempty"`
+	Status           int64         `json:"status,omitempty"`
+	Priority         int64         `json:"priority,omitempty"`
+	Description      string        `json:"description,omitempty"`
+	ResponderID      int64         `json:"responder_id,omitempty"`
+	Attachments      []interface{} `json:"attachments,omitempty"`
+	CcEmails         []string      `json:"cc_emails,omitempty"`
+	CustomFields     interface{}   `json:"custom_fields,omitempty"`
+	DueBy            time.Time     `json:"due_by,omitempty"`
+	EmailConfigID    int64         `json:"email_config_id,omitempty"`
+	FrDueBy          time.Time     `json:"fr_due_by,omitempty"`
+	GroupID          int64         `json:"group_id,omitempty"`
+	ProductID        int64         `json:"product_id,omitempty"`
+	Source           int64         `json:"source,omitempty"`
+	Tags             []string      `json:"tags,omitempty"`
+	CompanyID        uint64        `json:"company_id,omitempty"`
+	InternalAgentID  int64         `json:"internal_agent_id,omitempty"`
+	InternalGroupID  int64         `json:"internal_group_id,omitempty"`
 }
 
 type TicketUpdatePayload struct {
-	Name             string        `json:"name"`
-	RequesterID      int64         `json:"requester_id"` // UserID of the requester
-	Email            string        `json:"email"`
-	FacebookID       string        `json:"facebook_id"`
-	Phone            string        `json:"phone"`
-	TwitterID        string        `json:"twitter_id"`
-	UniqueExternalID string        `json:"unique_external_id"`
-	Subject          string        `json:"subject"`
-	Type             string        `json:"type"`
-	Status           int64         `json:"status"`
-	Priority         int64         `json:"priority"`
-	Description      string        `json:"description"`
-	ResponderID      int64         `json:"responder_id"`
-	Attachments      []interface{} `json:"attachments"`
-	CustomFields     interface{}   `json:"custom_fields"`
-	DueBy            time.Time     `json:"due_by"`
-	EmailConfigID    int64         `json:"email_config_id"`
-	FrDueBy          time.Time     `json:"fr_due_by"`
-	GroupID          int64         `json:"group_id"`
-	ProductID        int64         `json:"product_id"`
-	Source           int64         `json:"source"`
-	Tags             []string      `json:"tags"`
-	CompanyID        uint64        `json:"company_id"`
-	InternalAgentID  int64         `json:"internal_agent_id"`
-	InternalGroupID  int64         `json:"internal_group_id"`
+	Name             string        `json:"name,omitempty"`
+	RequesterID      int64         `json:"requester_id,omitempty"` // UserID of the requester
+	Email            string        `json:"email,omitempty"`
+	FacebookID       string        `json:"facebook_id,omitempty"`
+	Phone            string        `json:"phone,omitempty"`
+	TwitterID        string        `json:"twitter_id,omitempty"`
+	UniqueExternalID string        `json:"unique_external_id,omitempty"`
+	Subject          string        `json:"subject,omitempty"`
+	Type             string        `json:"type,omitempty"`
+	Status           int64         `json:"status,omitempty"`
+	Priority         int64         `json:"priority,omitempty"`
+	Description      string        `json:"description,omitempty"`
+	ResponderID      int64         `json:"responder_id,omitempty"`
+	Attachments      []interface{} `json:"attachments,omitempty"`
+	CustomFields     interface{}   `json:"custom_fields,omitempty"`
+	DueBy            time.Time     `json:"due_by,omitempty"`
+	EmailConfigID    int64         `json:"email_config_id,omitempty"`
+	FrDueBy          time.Time     `json:"fr_due_by,omitempty"`
+	GroupID          int64         `json:"group_id,omitempty"`
+	ProductID        int64         `json:"product_id,omitempty"`
+	Source           int64         `json:"source,omitempty"`
+	Tags             []string      `json:"tags,omitempty"`
+	CompanyID        uint64        `json:"company_id,omitempty"`
+	InternalAgentID  int64         `json:"internal_agent_id,omitempty"`
+	InternalGroupID  int64         `json:"internal_group_id,omitempty"`
 }
 
 type Contact struct {
