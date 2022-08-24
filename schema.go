@@ -10,11 +10,11 @@ type Ticket struct {
 	Deleted         bool          `json:"deleted"`
 	Description     string        `json:"description"`
 	DescriptionText string        `json:"description_text"`
-	DueBy           time.Time     `json:"due_by"`
+	DueBy           *time.Time    `json:"due_by"`
 	Email           string        `json:"email"`
 	EmailConfigID   int64         `json:"email_config_id"`
 	FacebookID      string        `json:"facebook_id"`
-	FrDueBy         time.Time     `json:"fr_due_by"`
+	FrDueBy         *time.Time    `json:"fr_due_by"`
 	FrEscalated     bool          `json:"fr_escalated"`
 	FwdEmails       []string      `json:"fwd_emails"`
 	GroupID         int64         `json:"group_id"`
@@ -35,8 +35,8 @@ type Ticket struct {
 	ToEmails        []string      `json:"to_emails"`
 	TwitterID       string        `json:"twitter_id"`
 	Type            string        `json:"type"`
-	CreatedAt       time.Time     `json:"created_at"`
-	UpdatedAt       time.Time     `json:"updated_at"`
+	CreatedAt       *time.Time    `json:"created_at"`
+	UpdatedAt       *time.Time    `json:"updated_at"`
 }
 
 type TicketCreatePayload struct {
@@ -56,9 +56,9 @@ type TicketCreatePayload struct {
 	Attachments      []interface{} `json:"attachments,omitempty"`
 	CcEmails         []string      `json:"cc_emails,omitempty"`
 	CustomFields     interface{}   `json:"custom_fields,omitempty"`
-	DueBy            time.Time     `json:"due_by,omitempty"`
+	DueBy            *time.Time    `json:"due_by,omitempty"`
 	EmailConfigID    int64         `json:"email_config_id,omitempty"`
-	FrDueBy          time.Time     `json:"fr_due_by,omitempty"`
+	FrDueBy          *time.Time    `json:"fr_due_by,omitempty"`
 	GroupID          int64         `json:"group_id,omitempty"`
 	ProductID        int64         `json:"product_id,omitempty"`
 	Source           int64         `json:"source,omitempty"`
@@ -84,9 +84,9 @@ type TicketUpdatePayload struct {
 	ResponderID      int64         `json:"responder_id,omitempty"`
 	Attachments      []interface{} `json:"attachments,omitempty"`
 	CustomFields     interface{}   `json:"custom_fields,omitempty"`
-	DueBy            time.Time     `json:"due_by,omitempty"`
+	DueBy            *time.Time    `json:"due_by,omitempty"`
 	EmailConfigID    int64         `json:"email_config_id,omitempty"`
-	FrDueBy          time.Time     `json:"fr_due_by,omitempty"`
+	FrDueBy          *time.Time    `json:"fr_due_by,omitempty"`
 	GroupID          int64         `json:"group_id,omitempty"`
 	ProductID        int64         `json:"product_id,omitempty"`
 	Source           int64         `json:"source,omitempty"`
@@ -118,8 +118,8 @@ type Contact struct {
 	TwitterID        string        `json:"twitter_id"`
 	UniqueExternalID string        `json:"unique_external_id"`
 	OtherCompanies   []interface{} `json:"other_companies"`
-	CreatedAt        time.Time     `json:"created_at"`
-	UpdatedAt        time.Time     `json:"updated_at"`
+	CreatedAt        *time.Time    `json:"created_at"`
+	UpdatedAt        *time.Time    `json:"updated_at"`
 }
 
 type ContactCreatePayload struct {
@@ -173,10 +173,10 @@ type Company struct {
 	Note         string      `json:"note"`
 	HealthScore  string      `json:"health_score"`
 	AccountTier  string      `json:"account_tier"`
-	RenewalDate  time.Time   `json:"renewal_date"`
+	RenewalDate  *time.Time  `json:"renewal_date"`
 	Industry     string      `json:"industry"`
-	CreatedAt    time.Time   `json:"created_at"`
-	UpdatedAt    time.Time   `json:"updated_at"`
+	CreatedAt    *time.Time  `json:"created_at"`
+	UpdatedAt    *time.Time  `json:"updated_at"`
 }
 
 type CompanyCreatePayload struct {
