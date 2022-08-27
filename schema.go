@@ -22,14 +22,14 @@ type Ticket struct {
 	IsEscalated     bool          `json:"is_escalated"`
 	Name            string        `json:"name"`
 	Phone           string        `json:"phone"`
-	Priority        int64         `json:"priority"`
+	Priority        Priority      `json:"priority"`
 	ProductID       int64         `json:"product_id"`
 	ReplyCcEmails   []string      `json:"reply_cc_emails"`
 	RequesterID     int64         `json:"requester_id"` // UserID of the requester
 	ResponderID     int64         `json:"responder_id"`
 	Source          int64         `json:"source"`
 	Spam            bool          `json:"spam"`
-	Status          int64         `json:"status"`
+	Status          Status        `json:"status"`
 	Subject         string        `json:"subject"`
 	Tags            []string      `json:"tags"`
 	ToEmails        []string      `json:"to_emails"`
@@ -38,6 +38,22 @@ type Ticket struct {
 	CreatedAt       *time.Time    `json:"created_at"`
 	UpdatedAt       *time.Time    `json:"updated_at"`
 }
+
+type Priority int64
+type Status int64
+
+const (
+	PriorityLow    Priority = 1
+	PriorityMedium Priority = 2
+	PriorityHigh   Priority = 3
+	PriorityUrgent Priority = 4
+)
+const (
+	StatusOpen     Status = 2
+	StatusPending  Status = 3
+	StatusResolved Status = 4
+	StatusClosed   Status = 5
+)
 
 type TicketCreatePayload struct {
 	Name             string        `json:"name,omitempty"`
