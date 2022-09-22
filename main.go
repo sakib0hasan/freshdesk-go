@@ -4,9 +4,10 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/go-resty/resty/v2"
 	"log"
 	"net/http"
+
+	"github.com/go-resty/resty/v2"
 )
 
 type Client interface {
@@ -54,7 +55,7 @@ func (service *freshDeskService) GetTicket(ID uint64) (*Ticket, error) {
 
 	var responseSchema Ticket
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Get(fmt.Sprintf("%v%v", "/api/v2/tickets/", ID))
 
 	if err != nil {
@@ -73,7 +74,7 @@ func (service *freshDeskService) GetAllTickets() ([]Ticket, error) {
 
 	var responseSchema []Ticket
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Get("/api/v2/tickets")
 
 	if err != nil {
@@ -130,7 +131,7 @@ func (service *freshDeskService) UpdateTicket(ID uint64, payload TicketUpdatePay
 func (service *freshDeskService) DeleteTicket(ID uint64) (*interface{}, error) {
 	var responseSchema interface{}
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Delete(fmt.Sprintf("%v%v", "/api/v2/tickets/", ID))
 
 	if err != nil {
@@ -150,7 +151,7 @@ func (service *freshDeskService) GetContact(ID uint64) (*Contact, error) {
 
 	var responseSchema Contact
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Get(fmt.Sprintf("%v%v", "/api/v2/contacts/", ID))
 
 	if err != nil {
@@ -169,7 +170,7 @@ func (service *freshDeskService) GetAllContacts() ([]Contact, error) {
 
 	var responseSchema []Contact
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Get("/api/v2/contacts")
 
 	if err != nil {
@@ -225,7 +226,7 @@ func (service *freshDeskService) UpdateContact(ID uint64, payload ContactUpdateP
 func (service *freshDeskService) SoftDeleteContact(ID uint64) (*interface{}, error) {
 	var responseSchema interface{}
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Delete(fmt.Sprintf("%v%v", "/api/v2/contacts/", ID))
 
 	if err != nil {
@@ -243,7 +244,7 @@ func (service *freshDeskService) SoftDeleteContact(ID uint64) (*interface{}, err
 func (service *freshDeskService) PermanentlyDeleteContact(ID uint64) (*interface{}, error) {
 	var responseSchema interface{}
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Delete(fmt.Sprintf("%v%v%v", "/api/v2/contacts/", ID, "/hard_delete"))
 
 	if err != nil {
@@ -262,7 +263,7 @@ func (service *freshDeskService) PermanentlyDeleteContact(ID uint64) (*interface
 func (service *freshDeskService) GetCompany(ID uint64) (*Company, error) {
 	var responseSchema Company
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Get(fmt.Sprintf("%v%v", "/api/v2/companies/", ID))
 
 	if err != nil {
@@ -281,7 +282,7 @@ func (service *freshDeskService) GetAllCompanies() ([]Company, error) {
 
 	var responseSchema []Company
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Get("/api/v2/companies")
 
 	if err != nil {
@@ -338,7 +339,7 @@ func (service *freshDeskService) UpdateCompany(ID uint64, payload CompanyUpdateP
 func (service *freshDeskService) DeleteCompany(ID uint64) (*interface{}, error) {
 	var responseSchema interface{}
 	resp, err := service.restyClient.R().
-		SetHeader("Content-Type", "application/json").SetResult(responseSchema).
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
 		Delete(fmt.Sprintf("%v%v", "/api/v2/companies/", ID))
 
 	if err != nil {
