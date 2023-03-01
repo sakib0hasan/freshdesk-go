@@ -4,10 +4,10 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/go-resty/resty/v2"
+	"go.uber.org/ratelimit"
 	"log"
 	"net/http"
-
-	"github.com/go-resty/resty/v2"
 )
 
 type Client interface {
@@ -15,6 +15,7 @@ type Client interface {
 
 	GetTicket(ID uint64) (*Ticket, error)
 	GetAllTickets() ([]Ticket, error)
+	GetTicketsByCompanyID(companyID, pageSize, page int) ([]Ticket, error)
 	CreateTicket(payload TicketCreatePayload) (*Ticket, error)
 	UpdateTicket(ID uint64, payload TicketUpdatePayload) (*Ticket, error)
 	DeleteTicket(ID uint64) (*interface{}, error)
@@ -35,11 +36,13 @@ type Client interface {
 
 type freshDeskService struct {
 	restyClient *resty.Client
+	rateLimiter ratelimit.Limiter
 }
 
-func NewClient(baseUrl string, user string, password string) Client {
+func NewClient(baseUrl string, user string, password string, maxRequestPerSecond int) Client {
 	_freshDeskService := freshDeskService{
 		restyClient: resty.New(),
+		rateLimiter: ratelimit.New(maxRequestPerSecond),
 	}
 
 	auth := user + ":" + password
@@ -352,4 +355,23 @@ func (service *freshDeskService) DeleteCompany(ID uint64) (*interface{}, error) 
 	}
 
 	return &responseSchema, nil
+}
+
+func (service *freshDeskService) GetTicketsByCompanyID(companyID, pageSize, page int) ([]Ticket, error) {
+	service.rateLimiter.Take()
+
+	var responseSchema []Ticket
+	resp, err := service.restyClient.R().
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
+		Get(fmt.Sprintf("/api/v2/tickets?company_id=%v&per_page=%v&page=%v", companyID, pageSize, page))
+
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode() != http.StatusOK {
+		return nil, errors.New(string(resp.Body()))
+	}
+
+	return responseSchema, nil
 }
