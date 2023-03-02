@@ -8,6 +8,7 @@ import (
 	"go.uber.org/ratelimit"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Client interface {
@@ -39,10 +40,10 @@ type freshDeskService struct {
 	rateLimiter ratelimit.Limiter
 }
 
-func NewClient(baseUrl string, user string, password string, maxRequestPerSecond int) Client {
+func NewClient(baseUrl string, user string, password string, maxRequestPerMinute int) Client {
 	_freshDeskService := freshDeskService{
 		restyClient: resty.New(),
-		rateLimiter: ratelimit.New(maxRequestPerSecond),
+		rateLimiter: ratelimit.New(maxRequestPerMinute, ratelimit.Per(time.Second*60), ratelimit.WithSlack(100)),
 	}
 
 	auth := user + ":" + password
