@@ -16,7 +16,7 @@ type Client interface {
 
 	GetTicket(ID uint64) (*Ticket, error)
 	GetAllTickets() ([]Ticket, error)
-	GetTicketsByCompanyID(companyID, pageSize, page int) ([]Ticket, error)
+	GetTicketsByCompanyID(companyID, pageSize, page int) ([]Ticket, error, bool)
 	CreateTicket(payload TicketCreatePayload) (*Ticket, error)
 	UpdateTicket(ID uint64, payload TicketUpdatePayload) (*Ticket, error)
 	DeleteTicket(ID uint64) (*interface{}, error)
