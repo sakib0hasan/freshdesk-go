@@ -358,7 +358,7 @@ func (service *freshDeskService) DeleteCompany(ID uint64) (*interface{}, error) 
 	return &responseSchema, nil
 }
 
-func (service *freshDeskService) GetTicketsByCompanyID(companyID, pageSize, page int) ([]Ticket, error) {
+func (service *freshDeskService) GetTicketsByCompanyID(companyID, pageSize, page int) ([]Ticket, error, bool) {
 	service.rateLimiter.Take()
 
 	var responseSchema []Ticket
@@ -367,12 +367,12 @@ func (service *freshDeskService) GetTicketsByCompanyID(companyID, pageSize, page
 		Get(fmt.Sprintf("/api/v2/tickets?company_id=%v&per_page=%v&page=%v", companyID, pageSize, page))
 
 	if err != nil {
-		return nil, err
+		return nil, err, false
 	}
 
 	if resp.StatusCode() != http.StatusOK {
-		return nil, errors.New(string(resp.Body()))
+		return nil, errors.New(string(resp.Body())), false
 	}
 
-	return responseSchema, nil
+	return responseSchema, nil, resp.Header().Get("Link") != ""
 }
