@@ -26,7 +26,7 @@ type Client interface {
 	CreateContact(payload ContactCreatePayload) (*Contact, error)
 	UpdateContact(ID uint64, payload ContactUpdatePayload) (*Contact, error)
 	SoftDeleteContact(ID uint64) (*interface{}, error)
-	// PermanentlyDeleteContact(ID uint64) (*interface{}, error)
+	PermanentlyDeleteContact(ID uint64) (*interface{}, error)
 
 	GetCompany(ID uint64) (*Company, error)
 	GetAllCompanies() ([]Company, error)
@@ -252,7 +252,6 @@ func (service *freshDeskService) PermanentlyDeleteContact(ID uint64) (*interface
 		Delete(fmt.Sprintf("%v%v%v", "/api/v2/contacts/", ID, "/hard_delete"))
 
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 
