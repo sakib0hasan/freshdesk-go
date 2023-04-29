@@ -249,7 +249,7 @@ func (service *freshDeskService) PermanentlyDeleteContact(ID uint64) (*interface
 	var responseSchema interface{}
 	resp, err := service.restyClient.R().
 		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
-		Delete(fmt.Sprintf("%v%v%v", "/api/v2/contacts/", ID, "/hard_delete"))
+		Delete(fmt.Sprintf("%v%v%v", "/api/v2/contacts/", ID, "/hard_delete?force=true"))
 
 	if err != nil {
 		return nil, err
