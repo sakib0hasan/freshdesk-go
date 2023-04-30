@@ -8,6 +8,7 @@ import (
 	"go.uber.org/ratelimit"
 	"log"
 	"net/http"
+	"net/url"
 	"time"
 )
 
@@ -21,6 +22,7 @@ type Client interface {
 	UpdateTicket(ID uint64, payload TicketUpdatePayload) (*Ticket, error)
 	DeleteTicket(ID uint64) (*interface{}, error)
 
+	FindContactByEmail(email string) (Contact, error)
 	GetContact(ID uint64) (*Contact, error)
 	GetAllContacts() ([]Contact, error)
 	CreateContact(payload ContactCreatePayload) (*Contact, error)
@@ -168,6 +170,28 @@ func (service *freshDeskService) GetContact(ID uint64) (*Contact, error) {
 	}
 
 	return &responseSchema, nil
+}
+func (service *freshDeskService) FindContactByEmail(email string) (Contact, error) {
+
+	var responseSchema []Contact
+	resp, err := service.restyClient.R().
+		SetHeader("Content-Type", "application/json").SetResult(&responseSchema).
+		Get(fmt.Sprintf("%v%v", "/api/v2/contacts?email=", url.QueryEscape(email)))
+
+	if err != nil {
+		log.Println(err)
+		return Contact{}, err
+	}
+
+	if resp.StatusCode() != http.StatusOK {
+		return Contact{}, errors.New(string(resp.Body()))
+	}
+
+	if len(responseSchema) == 0 {
+		return Contact{}, errors.New("contact not found")
+	}
+
+	return responseSchema[0], nil
 }
 
 func (service *freshDeskService) GetAllContacts() ([]Contact, error) {
